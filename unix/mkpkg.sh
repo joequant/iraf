@@ -22,3 +22,8 @@ echo "----------------------- GDEV ---------------------------"
 # Install the newly created executables.
 echo "install HSI executables in $host/bin.$MACH"
 mv -f hlib/*.e bin.$MACH
+pushd bin.$MACH
+for i in *.e
+do ln -sf $i ${i%.*}
+done
+popd

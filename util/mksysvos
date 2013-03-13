@@ -1,0 +1,41 @@
+#!/bin/csh -f
+#
+
+if (! $?iraf) then
+    #echo ""
+    #echo "Error:  You must have the iraf env variable defined !"
+    #echo ""
+    #exit 1
+
+    set  iraf 	= $cwd/
+endif
+
+
+set  c_start	= `date`
+/bin/rm -f spool */spool
+
+
+#$iraf/util/mkclean				# clean old binaries
+
+echo "=== VOS bootstrap ==="
+cd $iraf/unix					# VOS bootstrap
+source hlib/irafuser.csh
+sh -x mkpkg.sh |& tee -a spool
+
+echo "=== VOS core ==="
+cd $iraf/					# build core system
+mkpkg |& tee -a spool
+
+echo "=== NOAO ==="
+cd $iraf/noao					# build NOAO package
+setenv noao $cwd/
+mkpkg -p noao |& tee -a spool
+
+set  c_end	= `date`
+
+
+echo ""
+echo ""
+echo ""
+echo "Start:  $c_start"
+echo "  End:  $c_end"

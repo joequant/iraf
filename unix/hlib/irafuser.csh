@@ -1,59 +1,8 @@
 # IRAF definitions for the UNIX/csh user.  The additional variables iraf$ and
 # home$ should be defined in the user's .login file.
 
-
-set old_method		= 0
-
-if ($old_method == 1) then
-
-setenv OS_MACH	`uname -s | tr '[A-Z]' '[a-z]' | cut -c1-6`
-
-if (`uname -m` == "x86_64") then
-    if ($OS_MACH == "darwin") then
-        setenv MACH darwin
-        setenv IRAFARCH darwin
-    else
-        setenv MACH linux64
-        setenv IRAFARCH linux64
-    endif
-else if (-f /etc/redhat-release) then
-    setenv MACH redhat
-else
-    setenv MACH		`uname -s | tr '[A-Z]' '[a-z]'`
-endif
-
-if ($MACH == "darwin") then
-    # Let the IRAFARCH override the machine to support cross compilation.
-    if ($?IRAFARCH) then
-        if ("$IRAFARCH" == "macosx") then
-	    setenv MACH macosx
-        else if ("$IRAFARCH" == "macintel") then
-	    setenv MACH macintel
-        endif
-    else
-        if ("`uname -m`" == "i386") then
-            setenv MACH macosx
-            setenv IRAFARCH macosx
-        else if ("`uname -m`" == "x86_64") then
-            setenv MACH macintel
-            setenv IRAFARCH macintel
-        else 
-            setenv MACH ipad
-            setenv IRAFARCH ipad
-        endif
-    endif
-else if ($OS_MACH == "cygwin") then
-    setenv MACH cygwin
-endif
-
-else		# old_method
-            
-    setenv MACH 	`$iraf/unix/hlib/irafarch.csh`
-    setenv IRAFARCH 	`$iraf/unix/hlib/irafarch.csh`
-            
-endif		# old_method
-
-
+setenv MACH 	`$iraf/unix/hlib/irafarch.csh`
+setenv IRAFARCH 	`$iraf/unix/hlib/irafarch.csh`
 
 setenv	hostid	unix
 setenv	host	${iraf}unix/
@@ -64,7 +13,7 @@ setenv	tmp	/tmp/
 # Default to GCC for compilation.
 setenv	CC	gcc
 setenv	F77	$hlib/f77.sh
-setenv	F2C	$hbin/f2c.e
+setenv	F2C	/usr/bin/f2c
 setenv	RANLIB	ranlib
 
 switch ($MACH)
@@ -123,7 +72,7 @@ case ipad:
     breaksw
 
 case linux64:
-    setenv HSI_CF "-g -DLINUX -DREDHAT -DPOSIX -DSYSV -DLINUX64 -DMACH64 -w -m64"
+    setenv HSI_CF "-g -O2 -I/usr/include -I${hlib}libc -DLINUX -DREDHAT -DPOSIX -DSYSV -DLINUX64 -DMACH64 -w -m64 -DNOLIBCNAMES -DHOST_F2C -DHOST_CURL -DHOST_EXPAT"
     setenv HSI_XF "-g -Inolibc -w -/m64 -/Wunused"
     setenv HSI_FF "-g -m64 -DBLD_KERNEL"
     setenv HSI_LF "-m64 "
@@ -135,7 +84,7 @@ case linux64:
 
 case linux:
 case redhat:
-    setenv HSI_CF "-O -DLINUX -DREDHAT -DPOSIX -DSYSV -w -m32 -Wunused"
+    setenv HSI_CF "-g -O2 -I/usr/include -I${hlib}libc -DLINUX -DREDHAT -DPOSIX -DSYSV -w -m32 -Wunused"
     setenv HSI_XF "-Inolibc -w -/Wunused -/m32"
     setenv HSI_FF "-O -DBLD_KERNEL -m32"
     setenv HSI_LF "-m32"
@@ -191,10 +140,10 @@ setenv HSI_XF  "-I${HOME}/.iraf/ $HSI_XF"
 # The following determines whether or not the VOS is used for filename mapping.
 if (-f ${iraf}lib/libsys.a) then
 	setenv	HSI_LIBS\
-    "${hlib}libboot.a ${iraf}lib/libsys.a ${iraf}lib/libvops.a ${hlib}libos.a ${hbin}libf2c.a -lm"
+    "${hbin}libboot.a ${iraf}lib/libsys.a ${iraf}lib/libvops.a -lf2c ${hbin}libos.a"
 else
 	setenv	HSI_CF "$HSI_CF -DNOVOS"
-	setenv	HSI_LIBS "${hlib}libboot.a ${hlib}libos.a"
+	setenv	HSI_LIBS "${hbin}libboot.a ${hbin}libos.a"
 endif
 
 setenv HSI_LIBS "$HSI_LIBS $HSI_OSLIBS"

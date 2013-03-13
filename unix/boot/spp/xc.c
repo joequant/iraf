@@ -1213,7 +1213,12 @@ passflag:		    mkobject = YES;
 		arglist[nargs++] = mkfname (IRAFLIB6);
 	    }
 	}
-
+#ifdef HOST_CURL
+	arglist[nargs++] = "-lcurl";
+#endif
+#ifdef HOST_EXPAT
+	arglist[nargs++] = "-lexpat";
+#endif
 	/* Host libraries, searched after iraf libraries. */
 	for (i=0;  i < nhlibs;  i++)
 	    arglist[nargs++] = hlibs[i];
@@ -1360,6 +1365,7 @@ int *p_nargs;
 		    link_static = 1;
 	        } else if (strcmp (lflag, F_SHARED) == 0) {
 		    link_static = 0;
+#ifndef HOST_F2C
 #if defined(LINUX) || defined(BSD) || defined(X86) || defined(MACOSX)
 	        } else if ((strcmp (lflag, "-lf2c") == 0) || 
 	    	    (strcmp (lflag, "-lcompat") == 0)) {
@@ -1369,8 +1375,10 @@ int *p_nargs;
 		        arglist[nargs++] = mkfname (lflag);
 		        *p_nargs = nargs;
 		        return (1);
-	        }
 #endif
+#endif
+	        }
+
 #ifdef SOLARIS
 	        else if (strcmp (lflag, "-ldl") == 0) {
 		    /* This beastie has to be linked dynamic on Solaris, but

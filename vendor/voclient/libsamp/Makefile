@@ -26,7 +26,7 @@ SHAREDLIB 	= $(LIBDIR)/$(LIBBASE).so.$(VERSION)
 
 # includes, flags and libraries
 CC              = gcc
-CINCS           = -I$(INCDIR)  -I.
+CINCS           = -I$(INCDIR)  -I. -Ilibxrpc/include -Ilibxrpc
 
 ifeq ("$(PLATFORM)", "Darwin")
     ifeq  ("$(PLMACH)", "macintel")

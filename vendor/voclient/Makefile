@@ -37,50 +37,55 @@ LIBS		= -lm -lc -lpthread
 
 
 all:
-	(cd common      ; make all  ; make install)
-	(cd libvotable  ; make all  ; make install)
-	(cd libsamp     ; make all  ; make install)
-	(cd libvoclient ; make all  ; make install)
-	(cd voapps      ; make all  ; make install)
-	(cd libvo       ; make all  ; make install)
+	(cd common      ; ${MAKE} all  ; ${MAKE} install)
+	(cd libvotable  ; ${MAKE} all  ; ${MAKE} install)
+	(cd libsamp     ; ${MAKE} all  ; ${MAKE} install)
+	(cd libvoclient ; ${MAKE} all  ; ${MAKE} install)
+	(cd voapps      ; ${MAKE} all  ; ${MAKE} install)
+	(cd libvo       ; ${MAKE} all  ; ${MAKE} install)
 
 libs:
-	(cd common      ; make libs)
-	(cd libvotable  ; make libs)
-	(cd libsamp     ; make libs)
-	(cd libvoclient ; make libs)
-	(cd voapps      ; make libs)
-	(cd libvo       ; make libs)
+
+mylib:
+#	(cd common      ; ${MAKE} )
+	(cd libsamp     ; ${MAKE} .BASE lib ; cp *.h ../include ; cp *.a ../lib )
+	(cd libvoclient ; ${MAKE} install )
+	cp libsamp/cfitsio/*.h include
+	cp libsamp/libxrpc/*.h include
+	cp -r libsamp/libxrpc/include/xmlrpc-c include
+	(cd libvotable  ; ${MAKE} install)
+	(cd voapps      ; ${MAKE} lib ; cp *.a ../lib )
+	(rm -f *.o ; cd libvo       ; ${MAKE} HOST_CURL=1 lib)
 
 apps:
-	(cd common      ; make apps)
-	(cd libvotable  ; make apps)
-	(cd libsamp     ; make apps)
-	(cd libvoclient ; make apps)
-	(cd voapps      ; make apps)
+	(cd common      ; ${MAKE} apps)
+	(cd libvotable  ; ${MAKE} apps)
+	(cd libsamp     ; ${MAKE} apps)
+	(cd libvoclient ; ${MAKE} apps)
+	(cd voapps      ; ${MAKE} apps)
 
 examples:
-	(cd common      ; make examples)
-	(cd libvotable  ; make examples)
-	(cd libsamp     ; make examples)
-	(cd libvoclient ; make examples)
-	(cd voapps      ; make examples)
+	(cd common      ; ${MAKE} examples)
+	(cd libvotable  ; ${MAKE} examples)
+	(cd libsamp     ; ${MAKE} examples)
+	(cd libvoclient ; ${MAKE} examples)
+	(cd voapps      ; ${MAKE} examples)
 
 install:
-	(cd common      ; make install)
-	(cd libvotable  ; make install)
-	(cd libsamp     ; make install)
-	(cd libvoclient ; make install)
-	(cd voapps      ; make install)
-	(cd libvo       ; make install)
+	(cd common      ; ${MAKE} install)
+	(cd libvotable  ; ${MAKE} install)
+	(cd libsamp     ; ${MAKE} install)
+	(cd libvoclient ; ${MAKE} install)
+	(cd voapps      ; ${MAKE} install)
+	(cd libvo       ; ${MAKE} install)
 
 clean:
-	(cd common      ; make clean)
-	(cd libvotable  ; make clean)
-	(cd libsamp     ; make clean)
-	(cd libvoclient ; make clean)
-	(cd voapps      ; make clean)
-	(cd libvo       ; make clean)
+	(cd common      ; ${MAKE} clean)
+	(cd libvotable  ; ${MAKE} clean)
+	(cd libsamp     ; ${MAKE} clean)
+	(cd libvoclient ; ${MAKE} clean)
+	(cd voapps      ; ${MAKE} clean)
+	(cd libvo       ; ${MAKE} clean)
 	/bin/rm -rf voclient/lib/libvoclient.*
 	/bin/rm -rf bin/* lib/* include/* spool
 

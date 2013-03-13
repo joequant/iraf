@@ -42,7 +42,7 @@ extern	char		MEMCOM[];
 
 /* External names.
  */
-#ifndef NOLIBCNAMES
+#ifndef NOLIBCNAMES*/
 
 #define	getenv		envget
 #define	sys_nerr	u_sysnerr
@@ -320,8 +320,9 @@ extern void	c_xwhen (int exception, PFI new_handler, PFI *old_handler);
 
 /*
 */
-#include "/iraf/iraf/unix/bin/f2c.h"
-#include "/iraf/iraf/unix/hlib/libc/vosproto.h"
+#include "f2c.h"
+#undef abs
+#include "vosproto.h"
 
 #define	D_libc
 #define	D_libc_proto

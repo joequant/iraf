@@ -38,28 +38,28 @@ all::	curl expat
 
 libs::
 	(/bin/csh -f mklibs)
-	(cd expat ; ./configure --prefix=${HERE}/../; \ make ; make installlib)
+	(cd expat ; ./configure --prefix=${HERE}/.. ; $(MAKE) ; $(MAKE) installlib)
 
 curl::
 	(/bin/csh -f mklibs)
 
 expat::
-	(cd expat ; ./configure --prefix=${HERE}/../; \ make ; make installlib)
+	(cd expat ; ./configure --prefix=${HERE}/.. ; $(MAKE) ; $(MAKE) installlib)
 
 apps:
 
 install:
-	(cd curl  ; make install)
-	#(cd expat ; make install)
+	(cd curl  ; $(MAKE) install)
+	#(cd expat ; $(MAKE) install)
 	(/bin/rm -rf ../man ../share)
 
 clean:
-	(cd curl  	; make clean)
-	(cd expat     	; make clean)
+	(cd curl  	; $(MAKE) clean)
+	(cd expat     	; $(MAKE) clean)
 
 distclean:
-	(cd curl  	; make distclean)
-	(cd expat     	; make distclean)
+	(cd curl  	; $(MAKE) distclean)
+	(cd expat     	; $(MAKE) distclean)
 
 
 

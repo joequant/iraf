@@ -294,7 +294,7 @@ unop (int opcode)
 	    break;
 	case OP_NINT:
 	    if (in_type == OT_REAL)
-		iresult = nint (rval);
+   	        iresult = (int)(rval + 0.5);
 	    else
 		iresult = ival;
 	    break;

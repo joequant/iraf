@@ -101,7 +101,12 @@ int	BSS_kludge[256];
 
 void 	ready_ (void);
 
-
+#ifdef HOST_F2C
+extern int MAIN__();
+int MAIN__() {
+  exit(0);
+}
+#endif
 
 /* ZZSTRT -- Initialize the IRAF kernel at process startup time.
  */
