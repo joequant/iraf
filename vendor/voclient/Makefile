@@ -52,8 +52,6 @@ mylib:
 	(cd libsamp     ; ${MAKE} .BASE lib ; cp *.h ../include ; cp *.a ../lib )
 	(cd libvoclient ; ${MAKE} install )
 	cp libsamp/cfitsio/*.h include
-	cp libsamp/libxrpc/*.h include
-	cp -r libsamp/libxrpc/include/xmlrpc-c include
 	(cd libvotable  ; ${MAKE} install)
 	(cd voapps      ; ${MAKE} lib ; cp *.a ../lib )
 	(rm -f *.o ; cd libvo       ; ${MAKE} HOST_CURL=1 lib)
