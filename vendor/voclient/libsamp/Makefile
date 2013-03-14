@@ -70,10 +70,8 @@ objs:	$(OBJS) $(INCS)
 clean:
 	/bin/rm -f *.o *.a *.e *.so .BASE $(APPS)
 	(cd examples ; make clean)
-ifndef HOST_XMLRPC
 	(cd libxrpc  ; make clean)
 	/bin/rm -rf libxrpc/lib/build/* libxrpc/lib/*.dylib
-endif
 	(cd cfitsio  ; make clean)
 	/bin/rm -f SWIG* libvot* php_libvot.h
 	/bin/rm -f sampJava.[co]
@@ -102,9 +100,7 @@ zztest: zztest.o $(OBJS) lib
 ####################################
 
 .BASE:
-ifndef HOST_XMLRPC
 	(cd libxrpc ; ./mklibs ; make install)
-endif
 	#(cd cfitsio ; ./mklibs )
 	touch .BASE
 

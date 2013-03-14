@@ -1213,9 +1213,6 @@ passflag:		    mkobject = YES;
 		arglist[nargs++] = mkfname (IRAFLIB6);
 	    }
 	}
-#ifdef HOST_XMLRPC
-	arglist[nargs++] = "-lxmlrpc";
-#endif
 #ifdef HOST_CURL
 	arglist[nargs++] = "-lcurl";
 #endif
