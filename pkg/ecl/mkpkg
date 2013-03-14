@@ -6,8 +6,9 @@ $exit
 update:					# make ecl.e and install in bin$
         $ifeq (MACH, sparc) then
             $set    XFLAGS          = "$(XFLAGS) -/DNO_READLINE"
-        $else
+        $else $ifneq (MACH, linux, linux64) then
             $call   libs@readline
+        $endif
         $endif
 	$call	relink
 	$call	install
@@ -26,7 +27,7 @@ relink:
 	    $endif
 	    $ifolder (ytab.c,  grammar.y)
 		$echo "rebuilding ytab.c"
-		$ifeq (MACH, linux, redhat, suse)
+		$ifeq (MACH, linux, linux64, redhat, suse)
 		    !yacc -vd grammar.y; 
 		    !egrep -v "\<stdlib.h\>" y.tab.c > ytab.c; 
 		    !egrep -v "\<stdio.h\>" ytab.c > ntab.c; mv ntab.c ytab.c
@@ -53,8 +54,9 @@ relink:
 
 	$ifeq (MACH, sparc) then
 	    $set    XFLAGS          = "$(XFLAGS) -/DNO_READLINE"
-	$else
+	$else  $ifneq (MACH, linux, linux64) then
 	    $call	libs@readline
+        $endif
 	$endif
 
 	$update libpkg.a
@@ -71,9 +73,12 @@ link:
 	$set	LIBS = "-lc -lcur -lds -lstg"
 	$ifneq (MACH, sparc) then
 	  $ifeq (MACH, linux) then
-	    $set	LIBS2 = "libreadline.a -/L/usr/lib32 -lncurses"
-	  $else
+	    $set	LIBS2 = "-lreadline -/L/usr/lib32 -lncurses"
+	  $else $ifeq (MACH, linux64) then
+	    $set	LIBS2 = "-lreadline -lncurses"
+    	  $else
 	    $set	LIBS2 = "libreadline.a -lncurses"
+	  $endif
 	  $endif
 	$else
 	$set	LIBS2 = ""
