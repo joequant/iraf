@@ -93,7 +93,9 @@ apps:
 ####################################
 
 .BASE:
+ifndef HOST_EXPAT
 	(./mkbase $(HERE)/lib$(NAME).a)
+endif
 	touch .BASE
 
 lib: objs
