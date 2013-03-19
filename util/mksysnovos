@@ -23,7 +23,7 @@ source hlib/irafuser.csh
 sh -x mkpkg.sh |& tee -a spool
 
 echo "=== NOVOS build ==="
-cd $iraf/					# build NOVOS
+cd $iraf/sys					# build NOVOS
 mkpkg |& tee -a spool
 set  c_end	= `date`
 
