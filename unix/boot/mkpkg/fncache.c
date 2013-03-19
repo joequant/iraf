@@ -68,7 +68,7 @@ int	maxch;
 	 */
 	fn_misses++;
 	fnlen = os_sysfile (lname, fname, maxch);
-	if (fnlen > SZ_FNAME || strlen(lname) > SZ_LNAME)
+	if (strlen(fname) > SZ_FNAME || strlen(lname) > SZ_LNAME)
 	    return (fnlen);
 
 	/* Put fname in the cache.  Reuse slot at tail of list.
