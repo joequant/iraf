@@ -73,7 +73,7 @@ case ipad:
 
 case linux64:
     setenv HSI_CF "-g -O2 -I/usr/include -I${hlib}libc -DLINUX -DREDHAT -DPOSIX -DSYSV -DLINUX64 -DMACH64 -w -m64 -DNOLIBCNAMES -DHOST_F2C -DHOST_CURL -DHOST_EXPAT"
-    setenv HSI_XF "-g -Inolibc -w -/m64 -/Wunused"
+    setenv HSI_XF "-g -Inolibc -I${hlib}libc -w -/m64 -/Wunused"
     setenv HSI_FF "-g -m64 -DBLD_KERNEL"
     setenv HSI_LF "-m64 "
     setenv HSI_F77LIBS ""
@@ -85,7 +85,7 @@ case linux64:
 case linux:
 case redhat:
     setenv HSI_CF "-g -O2 -I/usr/include -I${hlib}libc -DLINUX -DREDHAT -DPOSIX -DSYSV -w -m32 -Wunused -DHOST_F2C -DHOST_CURL -DHOST_EXPAT -DHOST_XMLRPC"
-    setenv HSI_XF "-Inolibc -w -/Wunused -/m32"
+    setenv HSI_XF "-Inolibc -I${hlib}libc -w -/Wunused -/m32"
     setenv HSI_FF "-O -DBLD_KERNEL -m32"
     setenv HSI_LF "-m32"
     setenv HSI_F77LIBS ""
