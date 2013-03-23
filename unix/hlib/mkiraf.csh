@@ -4,7 +4,7 @@
 
 # The following definitions are site dependent. [SITEDEP]
 
-set	iraf		= "/iraf/iraf"
+set	iraf		= "%{_datadir}/iraf"
 set	imdir		= "/iraf/imdirs"
 set	cachedir	= "/iraf/cache"
 set	ttymsg  =\

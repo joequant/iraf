@@ -33,11 +33,16 @@ C
 C  COMMENTS JUST BEFORE THE END STATEMENT (LINES STARTING WITH *)
 C  GIVE C SOURCE FOR D1MACH.
 C
-      INTEGER SMALL(2)
-      INTEGER LARGE(2)
-      INTEGER RIGHT(2)
-      INTEGER DIVER(2)
-      INTEGER LOG10(2)
+C Need to explcitly put in integer size to work on GFORTRAN with
+C -fdefault-integer-4.
+C
+C See http://comments.gmane.org/gmane.comp.gcc.bugs/189700
+C For details
+      INTEGER(4) SMALL(2)
+      INTEGER(4) LARGE(2)
+      INTEGER(4) RIGHT(2)
+      INTEGER(4) DIVER(2)
+      INTEGER(4) LOG10(2)
       INTEGER I
 C/6S
 C/7S

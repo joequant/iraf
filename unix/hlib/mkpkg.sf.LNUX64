@@ -33,9 +33,9 @@ $special "sys$vops/lz/":	amovc.x		as$amovc.c
 #	main.x		$(XNO)
 #	;
 
-$set	XBIG	= '& "$xc -c -w -/Nx512 -/Ns3072 &"'
+$set	XBIG	= '& "$xc -c -w &"'
 $special "sys$fmtio/":		evvexpr.x	$(XBIG)	;
 
-$set    XNL     = '& "$xc -c -/NL400 &"'
+$set    XNL     = '& "$xc -c &"'
 $special "math$slalib/":        obs.f           $(XNL)  ;
 

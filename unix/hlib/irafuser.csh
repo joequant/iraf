@@ -71,12 +71,18 @@ case ipad:
     set    mkzflags = "'lflags=-z'"
     breaksw
 
+# The default-integer-8 is very important to make everything compatible
+# with f2c which defines integer as long
 case linux64:
+    setenv F77 gfortran
+    setenv XC_F77 gfortran
+    setenv XC_FFLAGS -fdefault-integer-8
+    setenv XC_LFLAGS -lgfortran
     setenv HSI_CF "-g -O2 -I/usr/include -I${hlib}libc -DLINUX -DREDHAT -DPOSIX -DSYSV -DLINUX64 -DMACH64 -w -m64 -DNOLIBCNAMES -DHOST_F2C -DHOST_CURL -DHOST_EXPAT"
-    setenv HSI_XF "-g -Inolibc -I${hlib}libc -w -/m64 -/Wunused"
-    setenv HSI_FF "-g -m64 -DBLD_KERNEL"
-    setenv HSI_LF "-m64 "
-    setenv HSI_F77LIBS ""
+    setenv HSI_XF "-g -O2 -Inolibc -I${hlib}libc -w -/m64 -/Wunused"
+    setenv HSI_FF "-g -O2 -m64 -DBLD_KERNEL -fdefault-integer-8"
+    setenv HSI_LF "-m64 -fdefault-integer-8"
+    setenv HSI_F77LIBS "-lgfortran"
     setenv HSI_LFLAGS ""
     setenv HSI_OSLIBS ""
     set    mkzflags = "'lflags=-Nxz -/Wl,-Bstatic'"
@@ -84,11 +90,13 @@ case linux64:
 
 case linux:
 case redhat:
+    setenv F77 gfortran
+    setenv XC_F77 gfortran
     setenv HSI_CF "-g -O2 -I/usr/include -I${hlib}libc -DLINUX -DREDHAT -DPOSIX -DSYSV -w -m32 -Wunused -DHOST_F2C -DHOST_CURL -DHOST_EXPAT -DHOST_XMLRPC"
     setenv HSI_XF "-Inolibc -I${hlib}libc -w -/Wunused -/m32"
     setenv HSI_FF "-O -DBLD_KERNEL -m32"
     setenv HSI_LF "-m32"
-    setenv HSI_F77LIBS ""
+    setenv HSI_F77LIBS "-lgfortran"
     setenv HSI_LFLAGS ""
     setenv HSI_OSLIBS ""
     set    mkzflags = "'lflags=-Nxz -/Wl,-Bstatic'"
@@ -140,7 +148,7 @@ setenv HSI_XF  "-I${HOME}/.iraf/ $HSI_XF"
 # The following determines whether or not the VOS is used for filename mapping.
 if (-f ${iraf}lib/libsys.a) then
 	setenv	HSI_LIBS\
-    "${hbin}libboot.a ${iraf}lib/libsys.a ${iraf}lib/libvops.a -lf2c ${hbin}libos.a"
+    "${hbin}libboot.a ${iraf}lib/libsys.a ${iraf}lib/libvops.a ${hbin}libos.a -lm -lgfortran"
 else
 	setenv	HSI_CF "$HSI_CF -DNOVOS"
 	setenv	HSI_LIBS "${hbin}libboot.a ${hbin}libos.a"
