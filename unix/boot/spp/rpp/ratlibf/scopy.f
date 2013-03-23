@@ -1,5 +1,5 @@
       subroutine scopy (from, i, to, j)
-      integer from (100), to (100)
+      integer from (*), to (*)
       integer i, j
       integer k1, k2
       k2 = j

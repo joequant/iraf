@@ -1,5 +1,5 @@
       integer function sdupl (str)
-      integer str (100)
+      integer str (*)
       integer mem( 60000)
       common/cdsmem/mem
       integer i

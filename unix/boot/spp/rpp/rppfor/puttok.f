@@ -1,5 +1,5 @@
       subroutine puttok (str)
-      integer str (100)
+      integer str (*)
       integer i
       i = 1
 23000 if (.not.(str (i) .ne. -2))goto 23002

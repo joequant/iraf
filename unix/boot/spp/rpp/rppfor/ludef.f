@@ -1,5 +1,5 @@
       integer function ludef (id, defn, table)
-      integer id (100), defn (100)
+      integer id (*), defn (*)
       integer table
       common /cdefio/ bp, buf (4096)
       integer bp

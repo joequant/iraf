@@ -1,8 +1,11 @@
       subroutine pbstr (s)
-      integer s(100)
+      integer s(*)
       integer lenstr, i
       integer length
       lenstr = length (s)
+      if (lenstr .eq. 0) then 
+         return
+      endif
       if (.not.(s(1) .eq. 46 .and. s(lenstr) .eq. 46))goto 23000
       if (.not.(lenstr .eq. 4))goto 23002
       if (.not.(s(2) .eq. 103))goto 23004

@@ -1,5 +1,5 @@
       integer function length (str)
-      integer str (100)
+      integer str (*)
       length = 0
 23000 if (.not.(str (length+1) .ne. -2))goto 23002
 23001 length = length + 1
