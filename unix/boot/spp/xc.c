@@ -67,7 +67,11 @@
 #define IRAFLIB3	"libvops.a"
 #define IRAFLIB4	"libos.a"
 #define IRAFLIB5	"libVO.a"
+#ifndef HOST_CFITSIO
 #define IRAFLIB6	"libcfitsio.a"
+#else
+#define IRAFLIB6	"-lcfitsio"
+#endif
 
 #ifdef LINUX
 char *fortlib[] = { "-lf2c",			/*  0  (host progs) */
