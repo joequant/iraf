@@ -1,0 +1,29 @@
+--- a/obm/ObmW/Imakefile	2005-05-27 07:43:45.000000000 +0800
++++ b/obm/ObmW/Imakefile	2013-03-09 01:19:48.313660746 +0800
+@@ -21,13 +21,7 @@
+         CCOPTIONS = -traditional-cpp
+ #endif
+ 
+-#if ((GccMajorVersion == 3) && (GccMinorVersion >= 1))
+-        CCOPTIONS = -DUSE_STDARG
+-#else
+-        CCOPTIONS =
+-#endif
+-
+-
++CCOPTIONS = -DUSE_STDARG
+ 
+ HEADERS = \
+ 	Arrow.h ArrowP.h Board.h BoardP.h Button.h ButtonP.h \
+--- a/xgterm/button.c~	1998-04-19 14:38:00.000000000 +0800
++++ b/xgterm/button.c	2013-03-10 18:14:44.145470160 +0800
+@@ -39,8 +39,7 @@
+ #include "data.h"
+ #include "error.h"
+ #include "menu.h"
+-
+-extern char *malloc();
++#include <stdlib.h>
+ 
+ extern void DoSecureKeyboard();
+ 

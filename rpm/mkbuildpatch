@@ -1,0 +1,3 @@
+#!/bin/bash
+git diff master linux-build > iraf-build.patch
+
