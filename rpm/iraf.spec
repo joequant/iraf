@@ -19,6 +19,11 @@ BuildRequires: f2c
 BuildRequires: tcsh
 BuildRequires: bison
 BuildRequires: flex
+#Mageia
+BuildRequires: libxt-devel libxmu-devel xaw3d-devel libxaw-devel
+#Fedora
+#BuildRequires: libXt-devel libXmu-devel Xaw3d-devel libXaw-devel
+BuildRequires: imake ncurses-devel
 
 %description
 IRAF stands for the Image Reduction and Analysis Facility. It
@@ -30,9 +35,9 @@ product of the National Optical Astronomy Observatories (www.noao.edu).
 %setup -q -c
 %patch0 -p1
 chmod a+x util/mksysvos  util/mksysnovos
-find -name "ytab.c" | xargs rm -f
+#find -name "ytab.c" | xargs rm -f
 # lex has problems run against xppcode
-find pkg -name "lexyy.c" | xargs rm -f
+#find pkg -name "lexyy.c" | xargs rm -f
 #sed -i unix/boot/spp/xpp/xppcode.c -e 's!extern char \*yytext_ptr;!!g' \
 #   -e s!yytext_ptr!yytext!g
 %setup -q -T -c -a 1 -n x11-iraf
@@ -40,22 +45,23 @@ find pkg -name "lexyy.c" | xargs rm -f
 
 %build
 export iraf=%{_builddir}/%{name}-%{version}/
-export host=unix
+export host=unix/
 export hostid=unix
-export hlib=${iraf}${host}/hlib/
-export PATH=$PATH:${iraf}${host}/bin/
-export pkglibs=${iraf}noao/lib/,${hlib}libc/,${iraf}${host}/bin/
+export hlib=${iraf}${host}hlib/
+export PATH=$PATH:${iraf}${host}bin/
+export pkglibs=${iraf}noao/lib/,${hlib}libc/,${iraf}${host}bin/
 cd %{_builddir}/%{name}-%{version}
 export HOST_CURL=1
 export HOST_READLINE=1
 export HOST_EXPAT=1
+unset IRAFARCH
 export IRAFARCH=`${hlib}irafarch.csh`
 
 rm -rf vo/votools/.old
 rm -rf vo/votools/.url*
-rm -f  ${iraf}${host}/bin/*
-rm -rf ${iraf}${host}/bin.*/*
-rm -f  ${iraf}${host}/bin
+rm -f  ${iraf}${host}bin/*
+rm -rf ${iraf}${host}bin.*/*
+rm -f  ${iraf}${host}bin
 rm -f  lib/*.a lib/*.o
 rm -f  bin
 ln -sf bin.${IRAFARCH} bin
@@ -76,26 +82,31 @@ popd
 ${iraf}util/mksysnovos
 
 unset NOVOS
-export PATH=$PATH:${iraf}${host}/bin/
-export pkglibs=${iraf}noao/lib/,${iraf}${host}/bin/,${hlib}
+export PATH=$PATH:${iraf}${host}bin/
+export pkglibs=${iraf}noao/lib/,${iraf}${host}bin/,${hlib}
 pushd vendor/voclient
 make clean
 make mylib 
 cp libvo/libVO.a ${iraf}lib
 popd
 
-export pkglibs=${iraf}noao/lib/,${iraf}${host}/bin/,${hlib}libc/
+export pkglibs=${iraf}noao/lib/,${iraf}${host}bin/,${hlib}libc/
 ${iraf}util/mksysvos
 sed -i ${hlib}mkiraf.csh -e s!/iraf/iraf!%{_datadir}/iraf!g
-cp ${iraf}${host}/bin/*.a ${iraf}lib
+sed -i ${hlib}cl.csh -e s!/iraf/iraf!%{_datadir}/iraf!g
+sed -i ${hlib}libc/iraf.h -e s!/iraf/iraf!%{_datadir}/iraf!g
+cp ${iraf}${host}bin/*.a ${iraf}lib
 
 find pkg -name "*.e"  | xargs rm -f
+cp -p ${iraf}${host}bin/*.e ${iraf}bin
+cp -p ${hlib}*.h ${iraf}lib
+cp -p ${hlib}*.sh ${iraf}bin
 
 cd %{_builddir}/x11-iraf
 find -name "*.o" | xargs rm -rf
 find -name "*.a" | xargs rm -rf
 xmkmf
-export PATH=$PATH:${iraf}${host}/bin/
+export PATH=$PATH:${iraf}${host}bin/
 make
 
 
