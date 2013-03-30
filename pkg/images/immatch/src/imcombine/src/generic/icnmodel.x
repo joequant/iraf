@@ -40,12 +40,12 @@ begin
 	    if (dowts && doaverage == YES) {
 		do i = 1, npts {
 		    k = i - 1
-		    val = max (zero, Mems[d[1]+k])
+		    val = max (zero, real(Mems[d[1]+k]))
 		    val = nm[1,1] + val/nm[2,1] + (val*nm[3,1])**2
 		    wt = wts[Memi[m[1]+k]]
 		    sum = val * wt**2
 		    do j = 2, n[i] {
-			val = max (zero, Mems[d[j]+k])
+			val = max (zero, real(Mems[d[j]+k]))
 			val = nm[1,j] + val/nm[2,j] + (val*nm[3,j])**2
 			wt = wts[Memi[m[j]+k]]
 			sum = sum + val * wt**2
@@ -55,11 +55,11 @@ begin
 	    } else {
 		do i = 1, npts {
 		    k = i - 1
-		    val = max (zero, Mems[d[1]+k])
+		    val = max (zero, real(Mems[d[1]+k]))
 		    val = nm[1,1] + val/nm[2,1] + (val*nm[3,1])**2
 		    sum = val
 		    do j = 2, n[i] {
-			val = max (zero, Mems[d[j]+k])
+			val = max (zero, real(Mems[d[j]+k]))
 			val = nm[1,j] + val/nm[2,j] + (val*nm[3,j])**2
 			sum = sum + val
 		    }
@@ -80,13 +80,13 @@ begin
 		    n1 = abs(n[i])
 		    if (n1 > 0) {
 			k = i - 1
-			val = max (zero, Mems[d[1]+k])
+			val = max (zero, real(Mems[d[1]+k]))
 			val = nm[1,1] + val/nm[2,1] + (val*nm[3,1])**2
 			wt = wts[Memi[m[1]+k]]
 			sum = val * wt**2
 			sumwt = wt
 			do j = 2, n1 {
-			    val = max (zero, Mems[d[j]+k])
+			    val = max (zero, real(Mems[d[j]+k]))
 			    val = nm[1,j] + val/nm[2,j] + (val*nm[3,j])**2
 			    wt = wts[Memi[m[j]+k]]
 			    sum = sum + val * wt**2
@@ -96,11 +96,11 @@ begin
 			    if (sumwt > 0)
 				average[i] = sqrt(sum) / sumwt
 			    else {
-				val = max (zero, Mems[d[1]+k])
+				val = max (zero, real(Mems[d[1]+k]))
 				val = nm[1,1] + val/nm[2,1] + (val*nm[3,1])**2
 				sum = Mems[d[1]+k]**2
 				do j = 2, n1 {
-				    val = max (zero, Mems[d[j]+k])
+				    val = max (zero, real(Mems[d[j]+k]))
 				    val = nm[1,j] + val/nm[2,j] +
 				        (val*nm[3,j])**2
 				    sum = sum + val
@@ -117,11 +117,11 @@ begin
 		    n1 = abs(n[i])
 		    if (n1 > 0) {
 			k = i - 1
-			val = max (zero, Mems[d[1]+k])
+			val = max (zero, real(Mems[d[1]+k]))
 			val = nm[1,1] + val/nm[2,1] + (val*nm[3,1])**2
 			sum = val
 			do j = 2, n1 {
-			    val = max (zero, Mems[d[j]+k])
+			    val = max (zero, real(Mems[d[j]+k]))
 			    val = nm[1,j] + val/nm[2,j] + (val*nm[3,j])**2
 			    sum = sum + val
 			}
@@ -170,12 +170,12 @@ begin
 	    if (dowts && doaverage == YES) {
 		do i = 1, npts {
 		    k = i - 1
-		    val = max (zero, Memi[d[1]+k])
+		    val = max (zero, real(Memi[d[1]+k]))
 		    val = nm[1,1] + val/nm[2,1] + (val*nm[3,1])**2
 		    wt = wts[Memi[m[1]+k]]
 		    sum = val * wt**2
 		    do j = 2, n[i] {
-			val = max (zero, Memi[d[j]+k])
+			val = max (zero, real(Memi[d[j]+k]))
 			val = nm[1,j] + val/nm[2,j] + (val*nm[3,j])**2
 			wt = wts[Memi[m[j]+k]]
 			sum = sum + val * wt**2
@@ -185,11 +185,11 @@ begin
 	    } else {
 		do i = 1, npts {
 		    k = i - 1
-		    val = max (zero, Memi[d[1]+k])
+		    val = max (zero, real(Memi[d[1]+k]))
 		    val = nm[1,1] + val/nm[2,1] + (val*nm[3,1])**2
 		    sum = val
 		    do j = 2, n[i] {
-			val = max (zero, Memi[d[j]+k])
+			val = max (zero, real(Memi[d[j]+k]))
 			val = nm[1,j] + val/nm[2,j] + (val*nm[3,j])**2
 			sum = sum + val
 		    }
@@ -210,13 +210,13 @@ begin
 		    n1 = abs(n[i])
 		    if (n1 > 0) {
 			k = i - 1
-			val = max (zero, Memi[d[1]+k])
+			val = max (zero, real(Memi[d[1]+k]))
 			val = nm[1,1] + val/nm[2,1] + (val*nm[3,1])**2
 			wt = wts[Memi[m[1]+k]]
 			sum = val * wt**2
 			sumwt = wt
 			do j = 2, n1 {
-			    val = max (zero, Memi[d[j]+k])
+			    val = max (zero, real(Memi[d[j]+k]))
 			    val = nm[1,j] + val/nm[2,j] + (val*nm[3,j])**2
 			    wt = wts[Memi[m[j]+k]]
 			    sum = sum + val * wt**2
@@ -226,11 +226,11 @@ begin
 			    if (sumwt > 0)
 				average[i] = sqrt(sum) / sumwt
 			    else {
-				val = max (zero, Memi[d[1]+k])
+				val = max (zero, real(Memi[d[1]+k]))
 				val = nm[1,1] + val/nm[2,1] + (val*nm[3,1])**2
 				sum = Memi[d[1]+k]**2
 				do j = 2, n1 {
-				    val = max (zero, Memi[d[j]+k])
+				    val = max (zero, real(Memi[d[j]+k]))
 				    val = nm[1,j] + val/nm[2,j] +
 				        (val*nm[3,j])**2
 				    sum = sum + val
@@ -247,11 +247,11 @@ begin
 		    n1 = abs(n[i])
 		    if (n1 > 0) {
 			k = i - 1
-			val = max (zero, Memi[d[1]+k])
+			val = max (zero, real(Memi[d[1]+k]))
 			val = nm[1,1] + val/nm[2,1] + (val*nm[3,1])**2
 			sum = val
 			do j = 2, n1 {
-			    val = max (zero, Memi[d[j]+k])
+			    val = max (zero, real(Memi[d[j]+k]))
 			    val = nm[1,j] + val/nm[2,j] + (val*nm[3,j])**2
 			    sum = sum + val
 			}
