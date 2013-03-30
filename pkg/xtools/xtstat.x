@@ -270,8 +270,8 @@ begin
 	call asrtd (sample, sample, nsample)
 
 	# Set fraction to use.
-	i = max (1, 1 + nsample * (1. - frac) / 2.)
-	j = min (nsample, 1 + nsample * (1. + frac) / 2.)
+	i = max (1, int(1 + nsample * (1. - frac) / 2.))
+	j = min (nsample, int(1 + nsample * (1. + frac) / 2.))
 	z1 = sample[i]
 	z2 = sample[j]
 
