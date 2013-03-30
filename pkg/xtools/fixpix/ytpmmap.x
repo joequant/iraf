@@ -871,16 +871,16 @@ begin
 	# Expand the mask bound to avoid missing the edge.
 	i = (xmin - 1) * icstep + (2*buf) - 1
 	xmin = (i - (2*buf)) / icstep + 1
-	xmin = max (1, min (ncpm, nint(xmin)))
+	xmin = max (1, min (ncpm, int(xmin+0.5)))
 	i = (xmax - 1) * icstep + (2*buf) + 1.99
 	xmax = (i - (2*buf)) / icstep + 1
-	xmax = max (1, min (ncpm, nint(xmax)))
+	xmax = max (1, min (ncpm, int(xmax+0.5)))
 	j = (ymin - 1) * ilstep + (2*buf) - 1
 	ymin = (j - (2*buf)) / ilstep + 1
-	ymin = max (1, min (nlpm, nint(ymin)))
+	ymin = max (1, min (nlpm, int(ymin+0.5)))
 	j = (ymax - 1) * ilstep + (2*buf) + 1.99
 	ymax = (j - (2*buf)) / ilstep + 1
-	ymax = max (1, min (nlpm, nint(ymax)))
+	ymax = max (1, min (nlpm, int(ymax+0.5)))
 
 	# Determine size of mask pixel in reference system.
 	# This is approximate because we don't take into account the
