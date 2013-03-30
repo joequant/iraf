@@ -21,7 +21,7 @@ include	<fio.h>
 
 int procedure stropen (str, maxch, mode)
 
-char	str[ARB]			#I string buffer for i/o
+pointer	str			#I string buffer for i/o
 int	maxch				#I capacity of buffer
 int	mode				#I FIO access mode
 
