@@ -28,7 +28,7 @@ pointer	output_pointer		# buffer pointer (output)
 int	nelem			# number of elements of storage required
 int	datatype		# datatype of the storage elements
 
-int	nchars, dtype
+int	nchars, dtype, sh_top
 include	<szdtype.inc>
 pointer	sp, cur_seg
 common	/salcom/ sp, cur_seg
@@ -51,8 +51,8 @@ begin
 	# Check for stack overflow, add new segment if out of room.
 	# Since SMARK must be called before SALLOC, cur_seg cannot be
 	# null, but we check anyhow.
-
-	if (cur_seg == NULL || sp + nchars >= SH_TOP(cur_seg))
+	call zeq(sh_top,Memi[cur_seg+1])
+	if (cur_seg == NULL || sp + nchars >= sh_top)
 	    call stk_mkseg (cur_seg, sp, nchars)
 
 	if (dtype == TY_CHAR)
@@ -61,8 +61,10 @@ begin
 	    output_pointer = (sp-1) / ty_size[dtype] + 1
 
 	sp = sp + nchars			# bump stack pointer
+#	call zzmsg("salloc - output_pointer", output_pointer)
+#	call zzmsg("       - cur_seg", cur_seg)
+#	call zzmsg("       - sp", sp)
 end
-
 
 # SMARK -- Mark the position of the stack pointer, so that stack space
 # can be freed by a subsequent call to SFREE.  This routine also performs
@@ -95,7 +97,6 @@ end
 procedure sfree (old_sp)
 
 pointer	old_sp			# previous value of the stack pointer
-
 pointer	old_seg
 int sh_base, sh_top, sh_oldseg
 pointer	sp, cur_seg
@@ -113,18 +114,29 @@ begin
 
         call zeq(sh_base,Memi[cur_seg])
 	call zeq(sh_top,Memi[cur_seg+1])
-	call zeq(sh_oldseq,Memi[cur_seg+2])
+	call zeq(sh_oldseg,Memi[cur_seg+2])
+
+#	call zzmsg("sfree - old_sp", old_sp)
+#	call zzmsg("      - cur_seg", cur_seg)
+#	call zzmsg("      - sh_base", sh_base)
+#	call zzmsg("      - sh_top", sh_top)
+#	call zzmsg("      - sh_oldseg", sh_oldseg)
 
 	while (old_sp < sh_base || old_sp > sh_top) {
-	    if (sh_oldseq == NULL)
+	    if (sh_oldseg == NULL)
 		call sys_panic (SYS_MSSTKUNFL, "Salloc underflow")
 
-	    old_seg = sh_oldseq		# discard segment
+	    old_seg = sh_oldseg		# discard segment
 	    call mfree (cur_seg, TY_STRUCT)
 	    cur_seg = old_seg
 	    call zeq(sh_base,Memi[cur_seg])
 	    call zeq(sh_top,Memi[cur_seg+1])
-	    call zeq(sh_oldseq,Memi[cur_seg+2])
+	    call zeq(sh_oldseg,Memi[cur_seg+2])
+	    call zzmsg("sfreel - old_sp", old_sp)
+	    call zzmsg("      - cur_seg", cur_seg)
+	    call zzmsg("      - sh_base", sh_base)
+	    call zzmsg("      - sh_top", sh_top)
+	    call zzmsg("      - sh_oldseg", sh_oldseg)
 	}
 
 	sp = old_sp					# pop stack
@@ -157,6 +169,11 @@ begin
 	call zeq(SH_BASE(new_seg), sp)
 	call zeq(SH_TOP(new_seg), sp - SZ_STKHDR + nchars)
 	call zeq(SH_OLDSEG(new_seg), cur_seg)
+
+#	call zzmsg("stk_mkseg - base", sp)
+#	call zzmsg("	      - top", sp - SZ_STKHDR + nchars)
+#	call zzmsg("          - cur_seg", cur_seg)
+#	call zzmsg("          - new_seg", new_seg)
 
 	# Make new segment the current segment.
 	cur_seg = new_seg
