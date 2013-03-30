@@ -88,7 +88,7 @@ begin
 		if (i == 1)
 		    pixgrow = grow / abs (x[i+1] - x[i])
 		else
-		    pixgrow = max (grow / abs (x[i+1] - x[i]), pixgrow)
+		    pixgrow = max (int(grow / abs (x[i+1] - x[i])), pixgrow)
 	    }
 	}
 
