@@ -13,15 +13,20 @@ int procedure mgtfwa (ptr, dtype)
 pointer	ptr, bufptr
 int	dtype
 int	locbuf, fwa
-int	coerce()
+int	coerce(), sizeof()
+int     factor
 
 begin
 	bufptr = coerce (ptr, dtype, TY_INT)
-	fwa = Memi[bufptr-5]
-	call zlocva (Memi[bufptr-5], locbuf)
-
-	if (abs (locbuf - fwa) > (6 * SZ_VMEMALIGN))
+	call zlocv1 (Memi[bufptr-5], locbuf, fwa)
+#	call zzmsg("mgtfwa", ptr)
+#	call zzval(bufptr)	
+#	call zzval(fwa)
+#	call zzval(locbuf)
+	factor = sizeof(TY_INT)/sizeof(TY_CHAR) / 2
+#	call zzval(factor)
+	if (abs (locbuf * factor  - fwa) > (6 * SZ_VMEMALIGN))
 	    call sys_panic (SYS_MCORRUPTED, "Memory fwa has been corrupted")
 
-	return (fwa)
+	return (fwa/factor)
 end

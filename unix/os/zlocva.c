@@ -22,3 +22,19 @@ ZLOCVA (
 	*location = ADDR_TO_LOC (variable);
 	return (XOK);
 }
+
+int
+ZLOCV1 (
+  XCHAR	*variable,
+  XINT	*location,
+  XINT	*addr
+)
+{
+	*location = ADDR_TO_LOC (variable);
+	*addr = variable;
+	return (XOK);
+}
+
+int ZEQ (XINT *a, XINT *b) {
+  *a = *b;
+}

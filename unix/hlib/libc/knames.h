@@ -116,6 +116,8 @@
 #define	ZINTPR		zintpr_
 #define	ZLOCPR		zlocpr_
 #define	ZLOCVA		zlocva_
+#define	ZLOCV1		zlocv1_
+#define ZEQ             zeq_
 #define	ZMALOC		zmaloc_
 #define	ZMEMCK		zmemck_
 #define	ZMFREE		zmfree_

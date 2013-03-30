@@ -97,6 +97,7 @@ procedure sfree (old_sp)
 pointer	old_sp			# previous value of the stack pointer
 
 pointer	old_seg
+int sh_base, sh_top, sh_oldseg
 pointer	sp, cur_seg
 common	/salcom/ sp, cur_seg
 
@@ -110,13 +111,20 @@ begin
 	# If the stack underflows (probably because of an invalid pointer)
 	# it is a fatal error.
 
-	while (old_sp < SH_BASE(cur_seg) || old_sp > SH_TOP(cur_seg)) {
-	    if (SH_OLDSEG(cur_seg) == NULL)
+        call zeq(sh_base,Memi[cur_seg])
+	call zeq(sh_top,Memi[cur_seg+1])
+	call zeq(sh_oldseq,Memi[cur_seg+2])
+
+	while (old_sp < sh_base || old_sp > sh_top) {
+	    if (sh_oldseq == NULL)
 		call sys_panic (SYS_MSSTKUNFL, "Salloc underflow")
 
-	    old_seg = SH_OLDSEG(cur_seg)		# discard segment
+	    old_seg = sh_oldseq		# discard segment
 	    call mfree (cur_seg, TY_STRUCT)
 	    cur_seg = old_seg
+	    call zeq(sh_base,Memi[cur_seg])
+	    call zeq(sh_top,Memi[cur_seg+1])
+	    call zeq(sh_oldseq,Memi[cur_seg+2])
 	}
 
 	sp = old_sp					# pop stack
@@ -146,9 +154,9 @@ begin
 	sp = coerce (new_seg, TY_STRUCT, TY_CHAR) + SZ_STKHDR
 
 	# Set up the segment descriptor.
-	SH_BASE(new_seg) = sp
-	SH_TOP(new_seg) = sp - SZ_STKHDR + nchars
-	SH_OLDSEG(new_seg) = cur_seg
+	call zeq(SH_BASE(new_seg), sp)
+	call zeq(SH_TOP(new_seg), sp - SZ_STKHDR + nchars)
+	call zeq(SH_OLDSEG(new_seg), cur_seg)
 
 	# Make new segment the current segment.
 	cur_seg = new_seg

@@ -42,6 +42,13 @@ begin
 	}
 
 	lwl = bufptr + offset
+#	call zzmsg("msvfwa", bufptr)
+#	call zzval(fwa)
+#	call zzval(lwl)
+#	call zzval(dtype)
+#	call zzval(nelem)
+#	call zzval(lsentinal)
+#	call zzval(usentinal)
 
 	Memi[bufptr-5] = fwa				# first word address
 	Memi[bufptr-4] = lwl				# last word location
