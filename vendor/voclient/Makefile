@@ -49,6 +49,7 @@ libs:
 mylib:
 #	(cd common      ; ${MAKE} )
 	mkdir -p include lib
+	mkdir -p libsamp/libxrpc/lib/build
 	(cd libsamp     ; ${MAKE} .BASE lib ; cp *.h ../include ; cp *.a ../lib )
 	(cd libvoclient ; ${MAKE} install )
 	cp libsamp/cfitsio/*.h include
