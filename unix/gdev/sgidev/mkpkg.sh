@@ -1,7 +1,7 @@
 # Make the SGI translators and install them in hlib.
 
 $CC -c $HSI_CF	sgidispatch.c
-$CC $HSI_LF	sgidispatch.o ../../hlib/libos.a $HSI_LIBS -o sgidispatch.e
+$CC $HSI_LF	sgidispatch.o $HSI_LIBS -o sgidispatch.e
 mv -f		sgidispatch.e ../../hlib
 rm		sgidispatch.o
 
