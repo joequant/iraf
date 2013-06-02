@@ -1223,6 +1223,9 @@ passflag:		    mkobject = YES;
 #ifdef HOST_EXPAT
 	arglist[nargs++] = "-lexpat";
 #endif
+#ifdef HOST_XMLRPC
+	arglist[nargs++] = "-lxmlrpc";
+#endif
 	/* Host libraries, searched after iraf libraries. */
 	for (i=0;  i < nhlibs;  i++)
 	    arglist[nargs++] = hlibs[i];

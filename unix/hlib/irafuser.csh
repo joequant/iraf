@@ -76,7 +76,7 @@ case ipad:
 case linux64:
     setenv XC_CFLAGS "-I${iraf}unix/f2c"
     setenv XC_FFLAGS "-I${iraf}unix/f2c"
-    setenv HSI_CF "-I${iraf}unix/f2c -g -O2 -I/usr/include -I${hlib}libc -DLINUX -DREDHAT -DPOSIX -DSYSV -DLINUX64 -DMACH64 -w -m64 -DNOLIBCNAMES -DHOST_F2C -DHOST_CURL -DHOST_EXPAT -DHOST_CFITSIO"
+    setenv HSI_CF "-I${iraf}unix/f2c -g -O2 -I/usr/include -I${hlib}libc -DLINUX -DREDHAT -DPOSIX -DSYSV -DLINUX64 -DMACH64 -w -m64 -DNOLIBCNAMES -DHOST_F2C -DHOST_CURL -DHOST_EXPAT -DHOST_XMLRPC -DHOST_CFITSIO"
     setenv HSI_XF "-I${iraf}unix/f2c -g -Inolibc -I${hlib}libc -w -/m64 -/Wunused"
     setenv HSI_FF "-I${iraf}unix/f2c -g -m64 -DBLD_KERNEL"
     setenv HSI_LF "-m64 "

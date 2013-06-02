@@ -1,5 +1,5 @@
 export iraf=`pwd`/
-export host=unix
+export host=unix/
 export hlib=${iraf}${host}/hlib/
 export PATH=$PATH:${iraf}${host}"/bin/"
 export pkglibs=${iraf}noao/lib/,${iraf}${host}/hlib/libc/,${iraf}${host}/bin/
@@ -7,6 +7,7 @@ export HOST_CURL=1
 export HOST_READLINE=1
 export HOST_EXPAT=1
 export HOST_CFITSIO=1
+export HOST_XMLRPC=1
 export IRAFARCH=`${hlib}irafarch.csh`
 
 rm -rf vo/votools/.old
@@ -41,7 +42,7 @@ popd
 
 export pkglibs=${iraf}noao/lib/,${iraf}${host}/bin/,${iraf}${host}/hlib/libc/
 ${iraf}util/mksysvos
-sed -i ${host}/hlib/mkiraf.csh -e s!/iraf/iraf!%{_datadir}/iraf!g
+sed -i ${host}/hlib/mkiraf.csh -e s!/iraf/iraf!%{_libdir}/iraf!g
 cp ${iraf}${host}/bin/*.a ${iraf}lib
 rm pkg/utilities/nttools/xx_nttools.e
 

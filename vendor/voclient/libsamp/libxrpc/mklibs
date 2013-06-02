@@ -7,7 +7,7 @@ setenv CC 	"gcc"
 setenv CXX 	"g++"
 
 set	build_curl	= 0
-set	build_xmlrpc	= 1
+set	build_xmlrpc	= 0
 
 
 
