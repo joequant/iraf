@@ -93,16 +93,22 @@ pwd	| sed -e "s;.*;s+U_HOME+&/+;"				>> _sed
 pwd	| sed -e "s;.*;s+U_UPARM+&/uparm/+;"			>> _sed
 
 if (! (-e "$imdir" && -w "$imdir") ) then
-    set imdir = HDR$
-    whoami	| sed -e "s;.*;s+U_IMDIR+${imdir}/+;"		>> _sed
+    if ( ${?XDG_DATA_HOME} == 0 ) then
+       setenv XDG_DATA_HOME ${HOME}/.local/share/iraf
+    endif
+    echo  "s+U_IMDIR+${XDG_DATA_HOME}/imdir/+"                 >> _sed
+    mkdir -p ${XDG_DATA_HOME}/imdir/
 else
     whoami	| sed -e "s;.*;s+U_IMDIR+${imdir}/&/+;"		>> _sed
     whoami	| sed -e "s;.*;mkdir $imdir/& 2> /dev/null;" | sh
 endif
 
 if (! (-e "$cachedir" && -w "$cachedir") ) then
-    set cachedir = /tmp/
-    whoami	| sed -e "s;.*;s+U_CACHEDIR+${cachedir}/+;"	>> _sed
+    if ( ${?XDG_CACHE_HOME} == 0 ) then
+       setenv XDG_CACHE_HOME ${HOME}/.cache
+    endif
+    echo  "s+U_CACHEDIR+${XDG_CACHE_HOME}/iraf/+"              >> _sed
+    mkdir -p ${XDG_CACHE_HOME}/iraf/
 else
     whoami	| sed -e "s;.*;s+U_CACHEDIR+${cachedir}/&/+;"	>> _sed
     whoami	| sed -e "s;.*;mkdir $cachedir/& 2> /dev/null;" | sh
