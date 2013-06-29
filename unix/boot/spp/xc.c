@@ -1224,7 +1224,8 @@ passflag:		    mkobject = YES;
 	arglist[nargs++] = "-lexpat";
 #endif
 #ifdef HOST_XMLRPC
-	arglist[nargs++] = "-lxmlrpc";
+	arglist[nargs++] = "-lxmlrpc_server_abyss";
+	arglist[nargs++] = "-lxmlrpc_client";
 #endif
 	/* Host libraries, searched after iraf libraries. */
 	for (i=0;  i < nhlibs;  i++)
