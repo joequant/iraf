@@ -18,7 +18,6 @@
 #define import_stdio
 #include <iraf.h>
 
-#include "readline.h"			/* to install rl_event_hook	*/
 #include "config.h"			/* CL declarations		*/
 #include "operand.h"
 #include "task.h"

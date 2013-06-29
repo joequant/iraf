@@ -20,7 +20,7 @@
 #define import_xwhen
 #include <iraf.h>
 
-#include "readline.h"			/* to install rl_event_hook	*/
+extern int (*rl_event_hook)(void);
 #include "config.h"			/* CL declarations		*/
 #include "clmodes.h"
 #include "operand.h"
