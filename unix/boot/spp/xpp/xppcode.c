@@ -690,7 +690,7 @@ int	type;
 	} else {
 	    /* UNREACHABLE when in declarations section of a procedure.
 	     */
-	    fprintf (yyout, type_decl[type]);
+	    fprintf (yyout, "%s", type_decl[type]);
 	}
 }
 

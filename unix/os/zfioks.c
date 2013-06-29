@@ -1391,7 +1391,7 @@ char    *msg;
 	int pid;
 	if (debug_ks) {
 	    fprintf (debug_fp, "[%5d] ", (pid = getpid())); dbgsp(pid);
-	    fprintf (debug_fp, msg);
+	    fprintf (debug_fp, "%s", msg);
 	}
 }
 static void
