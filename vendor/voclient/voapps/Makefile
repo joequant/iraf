@@ -43,7 +43,7 @@ else
 endif
 
 CLIBS           = -lm -lc -lcurl -lpthread -lm
-CFLAGS          = -g -Wall $(CARCH) -D$(PLATFORM) $(CINCS) -L./
+CFLAGS          := $(CFLAGS) $(CARCH) -D$(PLATFORM) $(CINCS) -L./
 
 
 
@@ -54,7 +54,7 @@ CINCS  	    = -I$(HERE) -I../ -I../include -L../ -L../lib/ -L../
 
 #F77 	    = g77
 F77 	    = gfortran
-FFLAGS 	    = -g -Wall
+#FFLAGS 	    = -g -Wall
 
 
 # list of source and include files
@@ -198,7 +198,7 @@ vosesame:  voApps.c vosesame.c
 $(STATICLIB): $(C_SRCS:%.c=Static/%.o)
 	/usr/bin/ar rv $@ $?
 Static/%.o: %.c $(C_INCS)
-	/usr/bin/gcc $(CINCS) $(CFLAGS) -c $< -o $@
+	$(CC) $(CINCS) $(CFLAGS) -c $< -o $@
 Static:
 	/bin/mkdir $@
 	chmod 777 $@
@@ -206,7 +206,7 @@ Static:
 $(SHAREDLIB): $(C_SRCS:%.c=Shared/%.o)
 	/usr/bin/ld -shared -o $@ $? -lc -ldl
 Shared/%.o: %.c $(C_INCS)
-	/usr/bin/gcc $(CINCS) $(CFLAGS) -fpic -shared -c $< -o $@
+	$(CC) $(CINCS) $(CFLAGS) -fpic -shared -c $< -o $@
 Shared:
 	/bin/mkdir $@
 	chmod 777 $@

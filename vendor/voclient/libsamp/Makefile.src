@@ -25,9 +25,7 @@ SHAREDLIB = $(HERE)/$(LIBBASE).so.$(VERSION)
 
 
 # includes, flags and libraries
-CC 		= gcc
 CINCS  		= -I$(HERE) -I../include -I./
-CFLAGS 		= -g -D$(PLATFORM) -m32 -Wall $(CINCS)
 LFLAGS		= -L. -L../lib
 
 DBG_LIB		=

@@ -3,7 +3,6 @@
 set p = `pwd`
 set top = $p:h
 
-setenv CC 	"gcc"
 setenv CXX 	"g++"
 
 set	build_cfitsio	= 1

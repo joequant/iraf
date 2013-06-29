@@ -3,7 +3,6 @@
 #set top = `(chdir .. ; pwd)`
 set top = `pwd`
 
-setenv CC 	"gcc"
 setenv CXX 	"g++"
 
 set	build_curl	= 0
@@ -66,7 +65,6 @@ endif
 
 
 
-setenv CC 	"gcc -g -ggdb -O0"
 setenv CXX 	"g++ -g -ggdb -O0"
 
 if ($build_xmlrpc == 1) then

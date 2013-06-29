@@ -24,14 +24,10 @@ SHAREDLIB 	= $(LIBDIR)/$(LIBBASE).so.$(VERSION)
 
 
 # includes, flags and libraries
-CC              = gcc
 CINCS           = -I$(INCDIR)  -I.
 
 CLIBS		= -lm -lc -lcurl -lpthread
 CARCH		= -m64 -mmacosx-version-min=10.5
-
-CFLAGS 		= -g -Wall $(CARCH) -D$(PLATFORM) $(CINCS) -L./
-
 
 
 # list of source and include files
@@ -92,7 +88,7 @@ endif
 $(STATICLIB): $(SRCS:%.c=Static/%.o)
 	/usr/bin/ar r $@ $?
 Static/%.o: %.c $(INCS)
-	/usr/bin/gcc $(CINCS) $(CFLAGS) -c $< -o $@
+	$(CC) $(CINCS) $(CFLAGS) -c $< -o $@
 Static:
 	/bin/mkdir $@
 	chmod 777 $@
@@ -100,7 +96,7 @@ Static:
 $(SHAREDLIB): $(SRCS:%.c=Shared/%.o)
 	/usr/bin/ld -shared -o $@ $? -lc -ldl
 Shared/%.o: %.c $(INCS)
-	/usr/bin/gcc $(CINCS) $(CFLAGS) -fpic -shared -c $< -o $@
+	$(CC) $(CINCS) $(CFLAGS) -fpic -shared -c $< -o $@
 Shared:
 	/bin/mkdir $@
 	chmod 777 $@

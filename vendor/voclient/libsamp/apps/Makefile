@@ -38,14 +38,9 @@ else
     CARCH       =
 endif
 
-CFLAGS          = -g -Wall $(CARCH) -D$(PLATFORM) $(CINCS) -L./
-
-
 
 # includes, flags and libraries
-CC 	    = gcc
 CINCS  	    = -I$(HERE) -I../ -I../../include -L../ -L../../lib/ -L../
-CFLAGS 	    = -g -Wall -D$(PLATFORM) $(CINCS)
 
 #F77 	    = g77
 F77 	    = gfortran

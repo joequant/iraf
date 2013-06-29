@@ -6,7 +6,6 @@
 # Compiler Flags.
 
 RELEASE		= v2.16
-CFLAGS 		=
 CDEBUGFLAGS 	= -O2 -Wall
 BOOTSTRAPCFLAGS = 
         

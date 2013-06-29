@@ -26,7 +26,7 @@ SHAREDLIB   = $(HERE)/$(LIBBASE).so.$(VERSION)
 # includes, flags and libraries
 CINCS   = -I./ -I./include -I../include -Ixmlrpc-c/lib/abyss/src
 #CFLAGS  = -O2 -m32 -g $(CINCS)
-CFLAGS  = -g -Wall $(CINCS)
+CFLAGS  := $(CFLAGS) $(CINCS)
 
 
 # list of source and include files
@@ -73,7 +73,7 @@ xrpc: $(SRCS:%.c=%.o)
 	cp -rp $(INCS) ./include/* ../../include
 
 %.o: %.c $(INCS)
-	/usr/bin/gcc -Wall $(CINCS) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 
 #=======================
@@ -83,7 +83,7 @@ xrpc: $(SRCS:%.c=%.o)
 $(STATICLIB): $(SRCS:%.c=Static/%.o)
 	/usr/bin/ar rv $@ $?
 Static/%.o: %.c $(INCS)
-	/usr/bin/gcc $(CINCS) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 Static:
 	/bin/mkdir $@
 	chmod 777 $@
@@ -91,7 +91,7 @@ Static:
 $(SHAREDLIB): $(SRCS:%.c=Shared/%.o)
 	/usr/bin/ld -shared -o $@ $? -lc -ldl
 Shared/%.o: %.c $(INCS)
-	/usr/bin/gcc $(CINCS) $(CFLAGS) -fpic -shared -c $< -o $@
+	$(CC) $(CFLAGS) -fpic -shared -c $< -o $@
 Shared:
 	/bin/mkdir $@
 	chmod 777 $@

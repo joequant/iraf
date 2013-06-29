@@ -3,7 +3,6 @@
 #set top = `(chdir .. ; pwd)`
 set top = `pwd`
 
-setenv CC 	"gcc"
 setenv CXX 	"g++"
 
 
