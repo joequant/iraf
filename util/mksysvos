@@ -31,6 +31,12 @@ cd $iraf/noao					# build NOAO package
 setenv noao $cwd/
 mkpkg -p noao |& tee -a spool
 
+echo "=== VO ==="
+cd $iraf/vo				# build VO package
+setenv vo $cwd/
+cd votools				# build VOTOOLS package
+mkpkg -p vo update
+
 set  c_end	= `date`
 
 
