@@ -12,10 +12,10 @@ $exit
 libc.a:
 	$set	XFLAGS	= "$(XFLAGS) -/Wall"
 
-	atof.c		<libc/ctype.h> <libc/libc.h> <libc/spp.h>\
+	atof.c		<libc/iraf/ctype.h> <libc/libc.h> <libc/spp.h>\
 			<libc/xnames.h>
-	atoi.c		<libc/ctype.h> <libc/libc.h> <libc/spp.h>
-	atol.c		<libc/ctype.h> <libc/libc.h> <libc/spp.h>
+	atoi.c		<libc/iraf/ctype.h> <libc/libc.h> <libc/spp.h>
+	atol.c		<libc/iraf/ctype.h> <libc/libc.h> <libc/spp.h>
 	caccess.c	<libc/libc.h> <libc/xnames.h> <libc/spp.h>
 	calloc.c	<libc/libc.h> <libc/spp.h> <libc/xnames.h>
 	callocate.c	<libc/spp.h> <libc/libc.h> <libc/xnames.h>
@@ -34,11 +34,11 @@ libc.a:
 	cerrget.c	<libc/libc.h> <libc/spp.h> <libc/xnames.h>
 	cerror.c	<libc/libc.h> <libc/spp.h> <libc/xnames.h>
 	cfchdir.c	<libc/libc.h> <libc/spp.h> <libc/xnames.h>
-	cfilbuf.c	<libc/libc.h> <libc/spp.h> <libc/stdio.h>\
+	cfilbuf.c	<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>\
 			<libc/xnames.h>
 	cfinfo.c	<libc/libc.h> <libc/xnames.h> <libc/finfo.h>\
 			<libc/spp.h>
-	cflsbuf.c	<libc/libc.h> <libc/spp.h> <libc/stdio.h>\
+	cflsbuf.c	<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>\
 			<libc/xnames.h>
 	cflush.c	<libc/libc.h> <libc/xnames.h> <libc/spp.h>
 	cfmapfn.c	<libc/libc.h> <libc/xnames.h> <libc/spp.h>
@@ -56,7 +56,7 @@ libc.a:
 	cimaccess.c	<libc/libc.h> <libc/xnames.h> <libc/spp.h>
 	cimdrcur.c	<libc/libc.h> <libc/xnames.h> <libc/spp.h>
 	ckimapc.c	<libc/libc.h> <libc/xnames.h> <libc/spp.h>
-	clexnum.c	<libc/ctype.h> <libc/lexnum.h> <libc/spp.h>\
+	clexnum.c	<libc/iraf/ctype.h> <libc/lexnum.h> <libc/spp.h>\
 			<libc/xnames.h> <libc/libc.h>
 	cmktemp.c	<libc/libc.h> <libc/xnames.h> <libc/spp.h>
 	cnote.c		<libc/libc.h> <libc/xnames.h> <libc/fset.h> <libc/spp.h>
@@ -65,14 +65,14 @@ libc.a:
 	cndopen.c	<libc/libc.h> <libc/spp.h> <libc/xnames.h>
 	cpoll.c		<libc/libc.h> <libc/spp.h> <libc/xnames.h>\
 			<libc/fpoll.h>
-	cprcon.c	<libc/libc.h> <libc/prstat.h> <libc/stdio.h>\
+	cprcon.c	<libc/libc.h> <libc/prstat.h> <libc/iraf/stdio.h>\
 			<libc/xnames.h> <libc/spp.h>
 	cprdet.c	<libc/libc.h> <libc/xnames.h> <libc/spp.h>
 	cprintf.c	<libc/libc.h> <libc/xnames.h> <libc/spp.h>
 	crcursor.c	<libc/libc.h> <libc/xnames.h> <libc/spp.h>
 	crdukey.c	<libc/libc.h> <libc/xnames.h> <libc/spp.h>
 	cread.c		<libc/libc.h> <libc/xnames.h> <libc/error.h>\
-			<libc/fset.h> <libc/spp.h> <libc/stdio.h>
+			<libc/fset.h> <libc/spp.h> <libc/iraf/stdio.h>
 	crename.c	<libc/libc.h> <libc/xnames.h> <libc/spp.h>
 	creopen.c	<libc/libc.h> <libc/spp.h> <libc/xnames.h>
 	csalloc.c	<libc/libc.h> <libc/spp.h> <libc/xnames.h>
@@ -99,12 +99,12 @@ libc.a:
 	cttyseti.c	<libc/libc.h> <libc/spp.h> <libc/xnames.h>
 	cttyso.c	<libc/libc.h> <libc/spp.h> <libc/xnames.h>
 	cttystati.c	<libc/libc.h> <libc/spp.h> <libc/xnames.h>
-	ctype.c		<libc/ctype.h>
+	ctype.c		<libc/iraf/ctype.h>
 	cungetc.c	<libc/libc.h> <libc/spp.h> <libc/xnames.h>
 	cungetl.c	<libc/libc.h> <libc/spp.h> <libc/xnames.h>
 	cvfnbrk.c	<libc/libc.h> <libc/spp.h> <libc/knames.h>
 	cwrite.c	<libc/libc.h> <libc/xnames.h> <libc/error.h>\
-			<libc/fset.h> <libc/spp.h> <libc/stdio.h>
+			<libc/fset.h> <libc/spp.h> <libc/iraf/stdio.h>
 	cxgmes.c	<libc/knames.h> <libc/libc.h> <libc/spp.h>\
 			<libc/xnames.h>
 	cxonerr.c	<libc/libc.h> <libc/xnames.h>
@@ -112,43 +112,43 @@ libc.a:
 	cxwhen.c	<libc/xwhen.h> <libc/knames.h> <libc/libc.h>\
 			<libc/spp.h> <libc/xnames.h>
 	cwmsec.c	<libc/libc.h> <libc/spp.h> <libc/knames.h>
-	eprintf.c	<libc/libc.h> <libc/spp.h> <libc/stdio.h>
-	fclose.c	<libc/libc.h> <libc/spp.h> <libc/stdio.h>\
+	eprintf.c	<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>
+	fclose.c	<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>\
 			<libc/xnames.h>
-	fdopen.c	<libc/fset.h> <libc/libc.h> <libc/spp.h> <libc/stdio.h>
-	fflush.c	<libc/libc.h> <libc/spp.h> <libc/stdio.h>\
+	fdopen.c	<libc/fset.h> <libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>
+	fflush.c	<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>\
 			<libc/xnames.h>
-	fgetc.c		<libc/libc.h> <libc/spp.h> <libc/stdio.h>
-	fgets.c		<libc/libc.h> <libc/spp.h> <libc/stdio.h>
-	fopen.c		<libc/libc.h> <libc/spp.h> <libc/stdio.h>\
+	fgetc.c		<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>
+	fgets.c		<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>
+	fopen.c		<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>\
 			<libc/xnames.h>
-	fputc.c		<libc/libc.h> <libc/spp.h> <libc/stdio.h>
-	fputs.c		<libc/libc.h> <libc/spp.h> <libc/stdio.h>
-	fread.c		<libc/libc.h> <libc/spp.h> <libc/stdio.h>
+	fputc.c		<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>
+	fputs.c		<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>
+	fread.c		<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>
 	free.c		<libc/libc.h> <libc/xnames.h> <libc/spp.h>
-	freopen.c	<libc/libc.h> <libc/spp.h> <libc/stdio.h>
-	fseek.c		<libc/fset.h> <libc/libc.h> <libc/spp.h> <libc/stdio.h>
-	ftell.c		<libc/libc.h> <libc/spp.h> <libc/stdio.h>
-	fwrite.c	<libc/libc.h> <libc/spp.h> <libc/stdio.h>
-	gets.c		<libc/libc.h> <libc/spp.h> <libc/stdio.h>
-	getw.c		<libc/libc.h> <libc/spp.h> <libc/stdio.h>
+	freopen.c	<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>
+	fseek.c		<libc/fset.h> <libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>
+	ftell.c		<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>
+	fwrite.c	<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>
+	gets.c		<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>
+	getw.c		<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>
 	index.c		<libc/libc.h> <libc/spp.h>
 	isatty.c	<libc/libc.h> <libc/spp.h> <libc/xnames.h>
 	malloc.c	<libc/libc.h> <libc/xnames.h> <libc/spp.h>
 	mathf.f
 	mktemp.c	<libc/libc.h> <libc/spp.h>
-	perror.c	<libc/libc.h> <libc/spp.h> <libc/stdio.h>\
+	perror.c	<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>\
 			<libc/xnames.h>
-	printf.c	<libc/ctype.h> <libc/libc.h> <libc/spp.h>\
-			<libc/stdio.h> <libc/xnames.h>
-	puts.c		<libc/libc.h> <libc/spp.h> <libc/stdio.h>
-	putw.c		<libc/libc.h> <libc/spp.h> <libc/stdio.h>
+	printf.c	<libc/iraf/ctype.h> <libc/libc.h> <libc/spp.h>\
+			<libc/iraf/stdio.h> <libc/xnames.h>
+	puts.c		<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>
+	putw.c		<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>
 	qsort.c		<libc/libc.h>
 	realloc.c	<libc/libc.h> <libc/xnames.h> <libc/spp.h>
-	rewind.c	<libc/libc.h> <libc/spp.h> <libc/stdio.h>
+	rewind.c	<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>
 	rindex.c	<libc/libc.h> <libc/spp.h>
-	scanf.c		<libc/ctype.h> <libc/libc.h> <libc/spp.h> <libc/stdio.h>
-	setbuf.c	<libc/fset.h> <libc/libc.h> <libc/spp.h> <libc/stdio.h>
+	scanf.c		<libc/iraf/ctype.h> <libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>
+	setbuf.c	<libc/fset.h> <libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>
 	stgio.c		<libc/libc.h> <libc/spp.h> <libc/xnames.h>
 	strcat.c	<libc/libc.h>
 	strcmp.c	<libc/libc.h>
@@ -159,9 +159,9 @@ libc.a:
 	strncmp.c	<libc/libc.h>
 	strncpy.c	<libc/libc.h>
 	spf.c		<libc/libc.h> <libc/spp.h> <libc/xnames.h>
-	sprintf.c	<libc/libc.h> <libc/spp.h> <libc/stdio.h>\
+	sprintf.c	<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>\
 			<libc/xnames.h>
 	system.c	<libc/knames.h> <libc/libc.h> <libc/spp.h>
-	ungetc.c	<libc/libc.h> <libc/spp.h> <libc/stdio.h>\
+	ungetc.c	<libc/libc.h> <libc/spp.h> <libc/iraf/stdio.h>\
 			<libc/xnames.h>
 	;
