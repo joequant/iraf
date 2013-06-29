@@ -857,8 +857,6 @@ void
 xr_freeParam (int cnum)
 {
     ClientP client   = &clientArray[cnum];
-    int    refcount  = 0;
-    extern int xmlrpc_refcount();
 
     assert (cnum < MAX_CLIENTS);		/* validate the client number */
 
@@ -873,14 +871,13 @@ xr_freeParam (int cnum)
 	    xmlrpc_DECREF (v);
 	}
 	*/
-        refcount = xmlrpc_refcount (client->param) - 1;
 	xmlrpc_DECREF (client->param);
 #ifdef CLEAN_ENV
 	xmlrpc_env_clean(&client->env);
 #endif
     }
 
-    if (refcount == 0)
+    if (xmlrpc_value_type(client->result) == XMLRPC_TYPE_DEAD)
 	client->param = (xmlrpc_value *) NULL;
 }
 
@@ -892,8 +889,6 @@ void
 xr_freeResult (int cnum)
 {
     ClientP client   = &clientArray[cnum];
-    int    refcount  = 0;
-    extern int xmlrpc_refcount();
 
     assert (cnum < MAX_CLIENTS);		/* validate the client number */
 
@@ -908,15 +903,14 @@ xr_freeResult (int cnum)
 	    xmlrpc_DECREF (v);
 	}
 	*/
-        refcount = xmlrpc_refcount (client->result) - 1;
-	if (refcount)
+	if (xmlrpc_value_type(client->result) != XMLRPC_TYPE_DEAD)
 	    xmlrpc_DECREF (client->result);
 #ifdef CLEAN_ENV
 	xmlrpc_env_clean(&client->env);
 #endif
     }
 
-    if (refcount == 0)
+    if (xmlrpc_value_type(client->result) == XMLRPC_TYPE_DEAD)
 	client->result = (xmlrpc_value *) NULL;
 }
 
