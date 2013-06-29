@@ -35,7 +35,7 @@ endif
 
 
 # Determine IRAF root directory (value set in install script).
-set d_iraf = "/iraf/iraf/"
+set d_iraf = "/usr/share/iraf/"
 if ($?iraf) then
     if (! -e $iraf) then
         echo "Warning: iraf=$iraf does not exist (check .cshrc or .login)"
@@ -46,6 +46,8 @@ endif
 if ($?iraf == 0) then
     setenv iraf "$d_iraf"
 endif
+
+setenv iraf_b /usr/lib/iraf/
 
 # Check for a version query.
 if ($#argv > 0) then
@@ -65,10 +67,10 @@ else
 endif
 
 if ($?IRAFARCH) then
-    if (-e $iraf/bin.${IRAFARCH}/${cl_binary}) then
+    if (-e ${iraf_b}bin/${cl_binary}) then
 	set MACH = $IRAFARCH
     else
-        echo "ERROR:  No $iraf/bin.${IRAFARCH}/${cl_binary} binary found."
+        echo "ERROR:  No ${iraf_b}bin/${cl_binary} binary found."
 	if ("$ACTUAL_ARCH" != "$IRAFARCH") then
             echo "ERROR:  IRAFARCH set to '$IRAFARCH', should be '$ACTUAL_ARCH'"
 	endif
@@ -108,8 +110,8 @@ else
         setenv IRAFARCH "$MACH"
     endif
 
-    if (! (-e $iraf/bin.${MACH}/${cl_binary}) ) then
-        echo "ERROR:  No $iraf/bin.${IRAFARCH}/${cl_binary} binary found."
+    if (! (-e ${iraf_b}bin/${cl_binary}) ) then
+        echo "ERROR:  No ${iraf_b}bin/${cl_binary} binary found."
 	exit 1
     endif
 endif
@@ -132,7 +134,7 @@ if ($?IRAFARCH) then
 	setenv arch ".$IRAFARCH"
     endif
 
-    setenv IRAFBIN ${iraf}bin$arch/
+    setenv IRAFBIN ${iraf_b}bin/
     set file = ${IRAFBIN}$cl_binary
     if (-e $file) then
 	exec $file
@@ -147,7 +149,7 @@ setenv IRAFARCH   $MACH
 
 
 setenv arch 	.$IRAFARCH
-setenv IRAFBIN 	${iraf}bin$arch/
+setenv IRAFBIN 	${iraf_b}bin/
 
 # Run the desired CL.
 exec  ${IRAFBIN}$cl_binary

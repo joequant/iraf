@@ -59,7 +59,7 @@ set	version		= "NOAO/IRAF V2.16"
 # System directories.
 
 set	as		= "host$as/"
-set	bin		= "iraf$bin(arch)/"
+set	bin		= "iraf_b$bin/"
 set	boot		= "host$boot/"
 set	dev		= "iraf$dev/"
 set	doc		= "iraf$doc/"
