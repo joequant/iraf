@@ -9,8 +9,8 @@
 
 #ifndef D_iraf
 /* ### Start of run time definitions */
-#define	HOST		"/usr/share/iraf/unix/"
-#define	IRAF		"/usr/share/iraf/"
+#define	HOST		"/iraf/iraf/unix/"
+#define	IRAF		"/iraf/iraf/"
 #define	TMP		"/tmp/"
 /* ### End of run time definitions */
 
@@ -107,7 +107,7 @@
 #ifndef D_knames
 #include "knames.h"
 /*
-#include "/usr/share/iraf/unix/hlib/libc/kproto.h"
+#include "/iraf/iraf/unix/hlib/libc/kproto.h"
 */
 #endif
 #undef import_knames
