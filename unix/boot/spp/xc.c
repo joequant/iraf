@@ -1552,9 +1552,9 @@ char	*file;
 	}
 
 
-	/* Include a custom 64-bit iraf.h file.
+	/* Include a custom iraf.h file.
 	 */
-#if defined(LINUX64) || defined(MACH64)
+#if defined(LINUX64) || defined(MACH64) || defined(LINUX)
 	memset (iraf_h, 0, SZ_PATHNAME);
 
 	if (os_sysfile ("iraf.h", iraf_h, SZ_PATHNAME) <= 0)
